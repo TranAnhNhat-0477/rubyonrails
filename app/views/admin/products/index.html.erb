@@ -1,0 +1,33 @@
+<h2 id="cus-admin-h2">List Products</h2>
+<%= link_to "Add a new product", new_product_path , id:"cus-admin-index" if authenticated? %>
+<table class="table table-bordered table-striped" id="cus-table">
+    <thead>
+        <tr>         
+            <th scope="col">Product Name</th>
+            <th scope="col">Product Description</th>          
+            <th scope="col">Price</th>
+            <th scope="col">Inventory</th>
+            <th scope="col">Image</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    <% @products.each do |product| %>
+        <tr>
+                <td><%= @product.name %></td>
+                <td id="cus-product-des"><%= @product.description %></td>              
+                <td><%= number_to_currency(@product.price.to_f / 100.0, unit: "£", precision: 2) %></td>
+                <td><%= render "inventory", product: @product %></td>
+                <td><%= image_tag product.featured_image, style:"width:80px; height:80px;" if product.featured_image.attached? %></td>
+                <td>
+                    <div class="btn-group">
+                    <% if authenticated? %>
+                        <%= link_to "Edit", edit_product_path(@product), class:"btn btn-warning" id:"cus-admin-edit" %>
+                        <%= button_to "Delete", @product, method: :delete, data: { turbo_confirm: "Are you sure?" } , class:"btn btn-danger" %>
+                    <% end %>
+                    </div>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

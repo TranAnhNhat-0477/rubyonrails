@@ -1,0 +1,23 @@
+
+<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
+
+
+
+<!--LOGIN FORM-->
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div id="form-container-cus">
+            <h1 id="cus-forgotpassword-h1">Forgot your password?</h1>
+            <%= tag.div(flash[:alert], style: "color:red; margin-left:65px") if flash[:alert] %>
+            <%= form_with url: passwords_path do |form| %>
+            <form id="cus-login-form">
+                <div id="form-item">
+                    <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address] %>
+                </div>
+                <%= form.submit "Email reset instructions" , id:"cus-login-submit" %>
+            </form>
+            <% end %>
+        </div>
+    </div>
+</div>
+<!--END LOGIN FORM-->

@@ -1,0 +1,38 @@
+
+<%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
+
+
+
+<!--LOGIN FORM-->
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div id="form-container-cus">
+            <h1 id="cus-login-h1">LOGIN</h1>
+            <%= tag.div(flash[:alert], style: "color:red; margin-left:65px") if flash[:alert] %>
+            <%= form_with url: session_path do |form| %>
+            <form id="cus-login-form">
+                <div id="form-item">
+                    <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address] %>
+                </div>
+                <div id="form-item">
+                    <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72 %>
+                </div>
+                <div id="form-item1">
+                    <div class="cus-cb-wrapper">
+                        <input type="checkbox" />
+                        <label>Remember me</label>
+                    </div>
+                    <div class="cus-a-help">
+                        <%= link_to "Forgot password?", new_password_path , id:"help" %>
+                    </div>
+                </div>
+                <%= form.submit "Sign in" , id:"cus-login-submit" %>
+                <div id="form-item">
+                    <span>You don't have an account?<a href="#">Sign up now</a></span>
+                </div>
+            </form>
+            <% end %>
+        </div>
+    </div>
+</div>
+<!--END LOGIN FORM-->

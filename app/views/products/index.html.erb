@@ -1,0 +1,36 @@
+<h1>Products</h1>
+
+<%= link_to "New product", new_product_path if authenticated? %>
+<%= link_to "Login", new_session_path unless authenticated? %>
+
+
+
+
+<!--SHOP CONTAINER-->
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <!--PRODUCT SECTION-->
+        <div class="col-lg-12 col-md-11">
+            <div class="row pb-3">
+                <% @products.each do |product| %>
+                <div class="col-lg-2 col-md-6 col-sm-6 pb-1">
+                    <div class="col">
+                        <%= link_to product, id:"product-wrapper-link" do %>
+                        <div class="card product-card">
+                            <%= image_tag product.featured_image, class:"card-img-top" if product.featured_image.attached? %>
+                            <div class="card-body">
+                                <p class="card-text" id="cus-product-name"><%= product.name %></p>
+                                <p class="card-text" id="cus-product-price"><%= number_to_currency(product.price.to_f / 100.0, unit: "£", precision: 2) %></p>
+                                <p><a href="#" class="btn btn-danger" id="btn-addtocart">Add to cart</a></p>
+                            </div>
+                        </div>
+                        <% end %>
+                    </div>
+                </div>
+                <% end %>
+            </div>
+        </div>
+        <!--END PRODUCT SECTION-->
+    </div>
+</div>
+<!--END SHOP-->
